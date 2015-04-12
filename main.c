@@ -3,20 +3,20 @@
 #include <malloc.h>
 #include <elf.h>
 
-int main()
+int main(int argc, char *argv[])
 {
   FILE* ElfFile = NULL;
   char* SectNames = NULL;
   int idx;
   Elf64_Ehdr elf;
-   ElfFile = fopen("core", "r");
+   ElfFile = fopen(argv[1], "r");
    if(ElfFile == NULL) {
       printf("Failed to open file\n");
       return 0;
    }
-   printf("Reading core file\n");
+   printf("Reading object file\n");
    fread(&elf, 1, sizeof elf, ElfFile);
-   printf("%x", elf.e_ident[0]);
+//   printf("%x", elf.e_ident[0]);
 
    if((elf.e_ident[EI_MAG0] != ELFMAG0) 
       && (elf.e_ident[EI_MAG1] != ELFMAG1)
